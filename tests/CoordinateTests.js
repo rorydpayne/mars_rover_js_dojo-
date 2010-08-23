@@ -14,7 +14,7 @@ TestCase("CoordinateTests", {
         assertEquals(point.x,1);
         assertEquals(point.y,2);
     },
-    
+
     testCoordinatesNotEqual: function() {
         var point = new Coordinate(1,2);
         assertNotEquals(point.x,100);

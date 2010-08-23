@@ -12,7 +12,7 @@ TestCase("PlateauTests", {
     testShouldBeAbleToSetSizeOfPlateau: function() {
         var endPoint = new Coordinate(2,2);
 	    var myPlateau = new Plateau(endPoint);
-        assertEquals(myPlateau.endPoint, endPoint);
+        assertEquals(endPoint, myPlateau.endPoint);
     },
 
     testCanAddRoversToPlateau: function(){
@@ -21,39 +21,26 @@ TestCase("PlateauTests", {
 
         var myPlateau = new Plateau(new Coordinate(3, 3));
 
-        myPlateau.placeRover(position, direction);
+        myPlateau.placeNewRover(position, direction);
 
-        assertEquals(myPlateau.roverCurrentPosition, position);
-        assertEquals(myPlateau.roverCurrentDirection, "N");
+        assertEquals(position, myPlateau.rover[0].roverCurrentPosition);
+        assertEquals("N", myPlateau.rover[0].roverCurrentDirection);
     },
 
-    testCanMoveRoverForwardsWhenFacingNorth: function() {
-        var position = new Coordinate(0,0);
-        var direction = "N";
+    testCanAddTwoRoversToPlateau: function() {
+        var position1 = new Coordinate(0,0);
+        var direction1 = "N";
+        var position2 = new Coordinate(0,1);
+        var direction2 = "E";
+
         var myPlateau = new Plateau(new Coordinate(3, 3));
-        myPlateau.placeRover(position, direction);
-        myPlateau.moveRover('M');
 
-        assertEquals(myPlateau.roverCurrentPosition.toString(), new Coordinate(0, 1).toString());
-    },
+        myPlateau.placeNewRover(position1, direction1);
+        myPlateau.placeNewRover(position2, direction2);
 
-    testCanTurnRoverRightWhenFacingNorth: function() {
-        var position = new Coordinate(0,0);
-        var direction = "N";
-        var myPlateau = new Plateau(new Coordinate(3, 3));
-        myPlateau.placeRover(position, direction);
-        myPlateau.moveRover('R');
-
-        assertEquals(myPlateau.roverCurrentDirection, "E");
-    },
-    
-    testCanTurnRoverLeftWhenFacingNorth: function() {
-        var position = new Coordinate(0,0);
-        var direction = "N";
-        var myPlateau = new Plateau(new Coordinate(3, 3));
-        myPlateau.placeRover(position, direction);
-        myPlateau.moveRover('L');
-
-        assertEquals(myPlateau.roverCurrentDirection, "W");
+        assertEquals(position1, myPlateau.rover[0].roverCurrentPosition);
+        assertEquals(position2, myPlateau.rover[1].roverCurrentPosition);
+        assertEquals("N", myPlateau.rover[0].roverCurrentDirection);
+        assertEquals("E", myPlateau.rover[1].roverCurrentDirection);
     }
 });
